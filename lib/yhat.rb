@@ -32,7 +32,7 @@ class Yhat
     http = Net::HTTP.new(uri.host, uri.port)
     request = Net::HTTP::Post.new("/models/" + modelname + "/")
     request.add_field('Content-Type', 'application/json')
-    request.body = data
+    request.body = data.to_json
     response = http.request(request)
     data = response.body
     JSON.parse(data)
