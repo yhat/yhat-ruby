@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = %q{yhat}
-  s.version = "0.0.1"
+  s.version = "0.0.2"
   s.date = %q{2013-11-04}
   s.homepage = %q{http://github.com/yhat/yhat-ruby}
   s.description = %q{A ruby wrapper for the Yhat API.}

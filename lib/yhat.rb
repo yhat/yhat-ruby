@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'json'
-
+require 'net/http'
+require 'uri'
 
 class Yhat
   # Class that can be used to access the Yhat API
@@ -27,7 +28,7 @@ class Yhat
   # @param data [Hash]
   # @return [Hash]
   def predict(modelname, data)
-    uri = URI.parse(@base_uri)
+    uri = URI::parse(@base_uri)
     http = Net::HTTP.new(uri.host, uri.port)
     request = Net::HTTP::Post.new("/models/" + modelname + "/")
     request.add_field('Content-Type', 'application/json')
