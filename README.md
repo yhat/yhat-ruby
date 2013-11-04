@@ -20,3 +20,5 @@ A ruby wrapper for the Yhat API.
         ["Coors Light", "60 Minute IPA", 47.50289],
         ["Coors Light", "Sierra Nevada Pale Ale", 51.62802]]}
 
+### TODO:
+    - add websocket client support
