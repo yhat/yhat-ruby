@@ -21,4 +21,4 @@ A ruby wrapper for the Yhat API.
         ["Coors Light", "Sierra Nevada Pale Ale", 51.62802]]}
 
 ### TODO:
-    - add websocket client support
+- add websocket client support
