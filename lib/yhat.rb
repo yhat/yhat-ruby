@@ -30,7 +30,8 @@ class Yhat
   def predict(modelname, data)
     uri = URI::parse(@base_uri)
     http = Net::HTTP.new(uri.host, uri.port)
-    request = Net::HTTP::Post.new("/models/" + modelname + "/")
+    endpoint = "/" + @username + "/models/" + modelname + "/"
+    request = Net::HTTP::Post.new(endpoint)
     request.add_field('Content-Type', 'application/json')
     request.body = data.to_json
     response = http.request(request)
