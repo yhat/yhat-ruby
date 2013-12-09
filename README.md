@@ -22,3 +22,10 @@ A ruby wrapper for the Yhat API.
 
 ### TODO:
 - add websocket client support
+
+### Deploying
+```
+# inc {version} in yhat.gemspec
+$ gem build yhat.gemspec
+$ gem push {version}.gem
+```

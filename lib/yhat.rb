@@ -33,6 +33,7 @@ class Yhat
     endpoint = "/" + @username + "/models/" + modelname + "/"
     request = Net::HTTP::Post.new(endpoint)
     request.add_field('Content-Type', 'application/json')
+    request.basic_auth(@username, @apikey)
     request.body = data.to_json
     response = http.request(request)
     data = response.body
