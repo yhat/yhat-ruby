@@ -29,3 +29,6 @@ A ruby wrapper for the Yhat API.
 $ gem build yhat.gemspec
 $ gem push {version}.gem
 ```
+
+
+[![Analytics](https://ga-beacon.appspot.com/UA-46996803-1/yhat-ruby/README.md)](https://github.com/yhat/yhat-ruby) 
