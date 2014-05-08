@@ -7,7 +7,7 @@ A ruby wrapper for the Yhat API.
     > require 'yhat'
     > require 'pp'
     > yh = Yhat.new("greg", "testing123", "http://yhat.enterprise-01.us-west-1.elb.amazonaws.com/")
-    > pp(yh.predict("PydataBeerRec", { "beer" => "Coors Light" }.to_json))
+    > pp(yh.predict("PydataBeerRec", { "beer" => "Coors Light" } ))
     {"yhat_id"=>"b6d9ba8f-81bd-4d6c-bcca-17315faa4299",
      "result"=>
        [["Coors Light", "Natural Light", 13.10332],
