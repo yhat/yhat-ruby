@@ -5,18 +5,38 @@ require 'uri'
 
 class Yhat
   # Class that can be used to access the Yhat API
- 
-  def initialize(username, apikey, uri = 'api.yhathq.com')
+  def initialize(username, apikey, env = 'cloud.yhathq.com')
     @username = username
     @apikey = apikey
-    @base_uri = uri
+    @base_uri = URI.encode(env.sub(/^http:\/\//, "").sub(/\/$/, ""))
 
-    if @base_uri == 'api.yhathq.com'
-      @is_enterprise = false
-    else
-      @is_enterprise = true
+    # set up a http request
+    uri = URI("http://#{@base_uri}")
+    http = Net::HTTP.new(uri.host, uri.port)
+
+    endpoint = URI::encode("/verify?username=#{username}&apikey=#{apikey}")
+    request = Net::HTTP::Post.new(endpoint)
+    request.add_field('Content-Type', 'application/json')
+    request.basic_auth(@username, @apikey)
+
+    # send the request
+    begin
+      response = http.request(request)
+    rescue
+      raise "Could not connect to host: #{@base_uri}"
     end
 
+    # try to parse the response
+    begin
+      data = JSON.parse(response.body)
+    rescue
+      raise "Bad response from host: #{@base_uri}"
+    end
+
+    # see if the response is valid
+    if data["success"] != "true"
+      raise "Incorrect username/apikey!" 
+    end
   end
 
   # Make a prediction by calling Yhat via HTTP. You should pass both
@@ -28,16 +48,35 @@ class Yhat
   # @param data [Hash]
   # @return [Hash]
   def predict(modelname, data)
-    uri = URI::parse(@base_uri)
+    # set up a http request
+    uri = URI("http://#{@base_uri}")
     http = Net::HTTP.new(uri.host, uri.port)
-    endpoint = "/" + @username + "/models/" + modelname + "/"
+
+    endpoint = URI::encode("/#{@username}/models/#{modelname}/")
     request = Net::HTTP::Post.new(endpoint)
     request.add_field('Content-Type', 'application/json')
     request.basic_auth(@username, @apikey)
-    request.body = data.to_json
-    response = http.request(request)
-    data = response.body
-    JSON.parse(data)
+
+    # convert data to JSON
+    begin
+      request.body = data.to_json
+    rescue
+      raise "Could not convert data to JSON"
+    end
+
+    # send the request
+    begin
+      response = http.request(request)
+    rescue
+      raise "Could not connect to host: #{@base_uri}"
+    end
+
+    # return a response
+    begin
+      return JSON.parse(response.body)
+    rescue
+      raise "Bad response from path: #{@base_uri}#{endpoint}"
+    end
   end
 end
 
