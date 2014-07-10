@@ -1,6 +1,14 @@
 # yhat-ruby
 A ruby wrapper for the Yhat API.
 
+### Installing
+
+Install using [RubyGams](https://rubygems.org/pages/download)
+
+```bash
+$ gem install yhat
+```
+
 ### Making a prediction
 
     $ irb
