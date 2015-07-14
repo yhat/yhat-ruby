@@ -14,8 +14,8 @@ $ gem install yhat
     $ irb
     > require 'yhat'
     > require 'pp'
-    > yh = Yhat.new("greg", "testing123", "http://yhat.enterprise-01.us-west-1.elb.amazonaws.com/")
-    > pp(yh.predict("PydataBeerRec", { "beer" => "Coors Light" } ))
+    > yh = Yhat.new("greg", "abcd1234", "https://sandbox.yhathq.com/")
+    > pp(yh.predict("BeerRec", { "beer" => "Coors Light" } ))
     {"yhat_id"=>"b6d9ba8f-81bd-4d6c-bcca-17315faa4299",
      "result"=>
        [["Coors Light", "Natural Light", 13.10332],
@@ -27,9 +27,6 @@ $ gem install yhat
         ["Coors Light", "Guinness Draught", 41.04731],
         ["Coors Light", "60 Minute IPA", 47.50289],
         ["Coors Light", "Sierra Nevada Pale Ale", 51.62802]]}
-
-### TODO:
-- add websocket client support
 
 ### Deploying
 ```
